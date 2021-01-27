@@ -6,7 +6,7 @@
       <p class="sub-header mt-5 mb-5">Here is the full list of prizes that you can win.</p>
 
       <div class="row pb-5">
-        <div class="col-md-4" v-for="(prize, key) in prizes" :key="`${prize.name}${key}`">
+        <div class="col-md-4 mb-3" v-for="(prize, key) in prizes" :key="`${prize.name}${key}`">
           <div class="bg-white">
             <div class="image-container">
               <img :src="prize.imageUrl" :alt="prize.name">

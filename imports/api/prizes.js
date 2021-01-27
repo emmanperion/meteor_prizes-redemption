@@ -10,9 +10,9 @@ if (Meteor.isServer) {
     // This code only runs on the server
     Meteor.publish('prizes', function () {
         return Prizes.find({
-            $or: [
-                { quantity: { $ne: 0 } }
-            ],
+            // $or: [
+            //     { quantity: { $gt: 0 } }
+            // ],
         });
     });
 
@@ -48,10 +48,11 @@ Meteor.methods({
 
         const prize = Prizes.findOne(_id)
 
-        if (prize.quantity !== 0) {
-            Prizes.update(prize._id, { $set: { quantity: prize.quantity - 1 } })
+        if (prize.quantity > 0) {
+            Prizes.update({_id: prize._id, quantity: { $gt: 0, $eq: prize.quantity }}, {$inc: {quantity: -1}});
         } else {
-            // Check on how to throw an error...
+            throw new Meteor.Error('Error', 'Prize is out of stock, cannot be redeemed');
         }
+
     }
 })
