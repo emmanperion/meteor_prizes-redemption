@@ -50,6 +50,12 @@ Meteor.methods({
 
         if (prize.quantity > 0) {
             Prizes.update({_id: prize._id, quantity: { $gt: 0, $eq: prize.quantity }}, {$inc: {quantity: -1}});
+
+            Redemptions.insert({
+                prizeId: prizeId,
+                redeemedAt: new Date(),
+                owner: this.userId,
+            });
         } else {
             throw new Meteor.Error('Error', 'Prize is out of stock, cannot be redeemed');
         }

@@ -40,12 +40,10 @@ export default {
   methods: {
     async redeem() {
       if (this.currentUser) {
-        await Meteor.call('prize.redeemed', this.prize._id._str, async function(error, result) {
+        await Meteor.call('prize.redeemed', this.prize._id._str, (error, result) => {
           if (error) {
             alert(error)
           } else {
-            await Meteor.call('prize.redeemed', this.prize._id._str)
-            await Meteor.call('redemptions.insert', this.prize._id._str)
             this.$emit('redeemed', this.prize)
           }
         });
