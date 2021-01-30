@@ -35,12 +35,12 @@
 
 <script>
 export default {
-  name: "RedeemConfirmationModal",
-  props: ['prize'],
+  name   : "RedeemConfirmationModal",
+  props  : ['prize'],
   methods: {
-    async redeem() {
+    redeem() {
       if (this.currentUser) {
-        await Meteor.call('prize.redeemed', this.prize._id._str, (error, result) => {
+        Meteor.call('prize.redeemed', this.prize._id._str, (error, result) => {
           if (error) {
             alert(error)
           } else {
@@ -52,7 +52,7 @@ export default {
       }
     }
   },
-  meteor: {
+  meteor : {
     currentUser() {
       return Meteor.user();
     }
