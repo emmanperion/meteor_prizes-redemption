@@ -15,7 +15,7 @@
             <div class="content-container text-center bg-white">
               <span v-text="`Win a ${prize.name}`" class="d-block mb-4"></span>
 
-              <button class="btn btn-warning text-white btn-pill px-4 py-2" @click.prevent="$router.push({ name: 'reward', params: { id: prize._id._str } })">Redeem ></button>
+              <button class="btn btn-warning text-white btn-pill px-4 py-2" @click.prevent="$router.push({ name: 'reward', params: { id: prize._id } })">Redeem ></button>
             </div>
           </div>
         </div>

@@ -17,8 +17,7 @@ if (Meteor.isServer) {
     });
 
     Meteor.publish('prize', function (id) {
-        const _id = new Mongo.ObjectID(id)
-        return Prizes.find({ _id: _id })
+        return Prizes.find({ _id: id })
     });
 
     Meteor.publish('redeemedPrizes', function () {
@@ -29,7 +28,7 @@ if (Meteor.isServer) {
         });
 
         const objectIds = redemptionList.map(item => {
-            return new Mongo.ObjectID(item.prizeId)
+            return item.prizeId
         })
 
         return Prizes.find({
@@ -44,9 +43,7 @@ Meteor.methods({
     'prize.redeemed'(prizeId) {
         check(prizeId, String)
 
-        const _id = new Mongo.ObjectID(prizeId)
-
-        const prize = Prizes.findOne(_id)
+        const prize = Prizes.findOne(prizeId)
 
         if (prize.quantity > 0) {
             Prizes.update({_id: prize._id, quantity: { $gt: 0, $eq: prize.quantity }}, {$inc: {quantity: -1}});

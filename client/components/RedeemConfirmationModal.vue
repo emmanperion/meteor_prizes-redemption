@@ -40,7 +40,7 @@ export default {
   methods: {
     redeem() {
       if (this.currentUser) {
-        Meteor.call('prize.redeemed', this.prize._id._str, (error, result) => {
+        Meteor.call('prize.redeemed', this.prize._id, (error, result) => {
           if (error) {
             alert(error)
           } else {
